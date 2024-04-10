@@ -25,6 +25,21 @@ const data = {
         height: '5 feet',
         bloom_time: 'July, August, September',
         bloom_color: 'Purple'
-    }
+    },
+    {
+        name: 'Doll’s Eyes',
+        slug: 'dolls-eyes',
+        image: '/images/dolls-eyes.jpg',
+        price: 5,
+        sci_name: 'Actaea pachypoda',
+        description: 'Doll’s Eyes, or White Baneberry, has deeply ribbed foliage and white, frothy clusters of fragrant flowers that bloom throughout May and June.  Pea-sized fruits develop in late summer and mature throughout early fall, often lasting until the first frost.  The berries extend from the stem on thick stalks which turn a vivid red, providing stark contrast to the bone china-white fruits.  The flower stigmas form a dark dot at the outer end of the berries, making them look like eyes, similar to the porcelain eyes used in dolls. The berries are poisonous, just like other fruit in the baneberry family; they should never be consumed.',
+        sun_exposure: 'Shade',
+        soil_moisture: 'Medium',
+        height: '2 feet',
+        bloom_time: 'May, June',
+        bloom_color: 'White'
+    },
 ]
 }
+
+export default data

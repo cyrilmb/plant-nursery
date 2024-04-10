@@ -1,9 +1,9 @@
 export type Product = {
-    _id: string
+    _id?: string
     name: string
     slug: string
     image: string
-    banner: string
+    banner?: string
     price: number
     sci_name: string
     description: string
