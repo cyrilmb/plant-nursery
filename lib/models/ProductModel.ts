@@ -5,11 +5,12 @@ export type Product = {
     image: string
     banner?: string
     price: number
-    sci_name: string
+    sciName: string
     description: string
-    sun_exposure: string
-    soil_moisture: string
+    sunExposure: string
+    soilMoisture: string
     height: string
-    bloom_time: string
-    bloom_color: string
+    bloomTime: string
+    bloomColor: string
+    countInStock?: number
  }
