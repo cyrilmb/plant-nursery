@@ -11,6 +11,16 @@ export default function ProductDetails({
   if (!product) {
     return <div>Product Not Found</div>
   }
+  const x = 2
+  let y = 4
+  function update(arg: number) {
+    return Math.random() + y * arg
+  }
+  y = 2
+
+  const result = update(x)
+  console.log('result: ', result)
+
   return (
     <>
       <div className="my-2">
@@ -47,15 +57,26 @@ export default function ProductDetails({
           </ul>
         </div>
         <div>
-          <div className="card bg-base-300 shadow-xl">
+          <div className="card bg-base-300 shadow-xl mt-3 md:mt-0">
             <div className="card-body">
               <div className="mb-2 flex justify-between">
                 <div>Price</div>
                 <div>${product.price}</div>
               </div>
               <div className="mb-2 flex justify-between">
-                <div>Available</div>
-                <div>${product.price}</div>
+                <div>Availability </div>
+                <div>
+                  <p className="italic">
+                    {product.countInStock > 0
+                      ? 'In Stock'
+                      : 'currently unavailable'}
+                  </p>
+                </div>
+              </div>
+              <div className="card-actions justify-center">
+                <button className="btn btn-primary w-full" type="button">
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>
