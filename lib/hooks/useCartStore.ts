@@ -38,7 +38,7 @@ export default function useCartService() {
         //update items in cart and prices
         increase: (item: OrderItem) => {
             const exist = items.find((x) => x.slug === item.slug)
-            const undatedCartItems = exist 
+            const updatedCartItems = exist 
                 ? items.map((x) => 
                     x.slug === item.slug ? {...exist, qty: exist.qty + 1 } : x
                 ) 
