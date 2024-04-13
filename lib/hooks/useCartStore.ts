@@ -20,10 +20,10 @@ export const cartStore = create<Cart>(() => initialState)
 
 const calcPrice = (items: OrderItem[]) => {
     const itemsPrice = round2Decimal(
-        items.reduce((acc, item) => acc = item.price * item.qty, 0)
-    ),
-    taxPrice = round2Decimal(Number(0.0685 * itemsPrice)),
-    totalPrice = round2Decimal(itemsPrice + taxPrice)
+            items.reduce((acc, item) => acc = item.price * item.qty, 0)
+        ),
+        taxPrice = round2Decimal(Number(0.0685 * itemsPrice)),
+        totalPrice = round2Decimal(itemsPrice + taxPrice)
     return { itemsPrice, taxPrice, totalPrice }
 }
 
@@ -43,8 +43,15 @@ export default function useCartService() {
                     x.slug === item.slug ? {...exist, qty: exist.qty + 1 } : x
                 ) 
             : [...items, {...item, qty: 1 }]
+            //update items and prices based on updated values
             const { itemsPrice, taxPrice, totalPrice } = 
                 calcPrice(updatedCartItems)
+                cartStore.setState({
+                    items: updatedCartItems,
+                    itemsPrice,
+                    taxPrice,
+                    totalPrice
+                })
         }
     }
 }
