@@ -37,6 +37,7 @@ export default function useCartService() {
         totalPrice,
         //update items in cart and prices
         increase: (item: OrderItem) => {
+            //find item based on slug, put in exist
             const exist = items.find((x) => x.slug === item.slug)
             const updatedCartItems = exist 
                 ? items.map((x) => 
@@ -52,6 +53,22 @@ export default function useCartService() {
                     taxPrice,
                     totalPrice
                 })
+        },
+        decrease: (item: OrderItem) => {
+            const exist = items.find(
+            (x) => 
+                x.slug === item.slug        
+            )
+            // if not exist then don't change state
+            if (!exist) return
+            const undatedCartItems = 
+            exist.qty === 1 
+                ? items.filter((x: OrderItem) => x.slug !== item.slug)
+                : items.map((x) => 
+                    item.slug
+                        ? { ...exist, qty: exist.qty - 1 }
+                        : x
+                )
         }
     }
 }
