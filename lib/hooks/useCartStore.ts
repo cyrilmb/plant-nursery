@@ -61,7 +61,7 @@ export default function useCartService() {
             )
             // if not exist then don't change state
             if (!exist) return
-            const undatedCartItems = 
+            const updatedCartItems = 
             exist.qty === 1 
                 ? items.filter((x: OrderItem) => x.slug !== item.slug)
                 : items.map((x) => 
@@ -69,6 +69,15 @@ export default function useCartService() {
                         ? { ...exist, qty: exist.qty - 1 }
                         : x
                 )
-        }
+            //update items and prices based on updated values
+                const { itemsPrice, taxPrice, totalPrice } = 
+                calcPrice(updatedCartItems)
+                cartStore.setState({
+                    items: updatedCartItems,
+                    itemsPrice,
+                    taxPrice,
+                    totalPrice
+                })
+        },
     }
 }
