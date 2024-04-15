@@ -77,6 +77,28 @@ export default function CartDetails() {
               </tbody>
             </table>
           </div>
+          <div>
+            <div className="card bg-base-300">
+              <div className="card-body">
+                <ul>
+                  <li>
+                    <div className="pb-3 text-lg">
+                      Subtotal ({items.reduce((a, c) => a + c.qty, 0)}) : $
+                      {itemsPrice}
+                    </div>
+                  </li>
+                  <li>
+                    <button
+                      className="btn btn-primary w-full"
+                      onClick={() => router.push('/shipping')}
+                    >
+                      Proceed to Checkout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </>
