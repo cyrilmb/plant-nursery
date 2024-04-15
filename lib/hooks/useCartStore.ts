@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { round2Decimal } from "../utils";
 import { OrderItem } from "../models/OrderModel";
+import { persist } from "zustand/middleware";
 
 type Cart = {
     items: OrderItem[]
@@ -16,10 +17,16 @@ const initialState: Cart = {
     totalPrice: 0
 }
 
-export const cartStore = create<Cart>(() => initialState)
+export const cartStore = create<Cart>()(
+    persist(() => initialState, {
+        name: 'cartStore',
+    })
+)
 
 const calcPrice = (items: OrderItem[]) => {
     const itemsPrice = round2Decimal(
+        //reduce method takes an arr and calls callback fxn (multiply two values)
+        //and return accumulated results. acc initial value set to 0
             items.reduce((acc, item) => acc = item.price * item.qty, 0)
         ),
         taxPrice = round2Decimal(Number(0.0685 * itemsPrice)),
@@ -31,7 +38,9 @@ export default function useCartService() {
     //extract terms from cartStore
     const {items, itemsPrice, taxPrice, totalPrice} = cartStore()
     return {
-        items, 
+        //return extracted terms so components using this hook can access current
+        //cart state w/out needing to access store
+        items,
         itemsPrice,
         taxPrice,
         totalPrice,
