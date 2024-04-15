@@ -66,7 +66,7 @@ export default function CartDetails() {
                       <button
                         className="btn"
                         type="button"
-                        onClick={() => decrease(item)}
+                        onClick={() => increase(item)}
                       >
                         +
                       </button>
