@@ -74,7 +74,7 @@ export default function useCartService() {
             exist.qty === 1 
                 ? items.filter((x: OrderItem) => x.slug !== item.slug)
                 : items.map((x) => 
-                    item.slug
+                    x.slug === item.slug
                         ? { ...exist, qty: exist.qty - 1 }
                         : x
                 )
