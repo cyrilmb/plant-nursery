@@ -6,7 +6,7 @@ import Header from '@/components/header/Header'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Prairie Burn',
+  title: 'Prairie Burn Nursery',
   description: 'Minnesota native wildflower nursery',
 }
 
