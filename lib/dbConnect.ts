@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-async function dbConnet() {
+async function dbConnect() {
     try {
         await mongoose.connect(process.env.MONGODB_URI!)
     } catch (error) {
@@ -8,4 +8,4 @@ async function dbConnet() {
     }
 }
 
-export default dbConnet
+export default dbConnect
