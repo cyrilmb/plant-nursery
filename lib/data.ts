@@ -28,7 +28,9 @@ const data = {
         height: '5 feet',
         bloomTime: 'June, July, August',
         bloomColor: 'Pink',
-        countInStock: 7
+        countInStock: 7,
+        isFeatured: true,
+        banner: '/images/queen-of-the-prairie.jpg'
     },
     {
         name: 'Dense Blazing Star',
@@ -42,7 +44,9 @@ const data = {
         height: '5 feet',
         bloomTime: 'July, August, September',
         bloomColor: 'Purple',
-        countInStock: 3
+        countInStock: 3,
+        isFeatured: true,
+        banner: '/images/dense-blazing-star.jpg'
     },
     {
         name: 'Doll’s Eyes',
@@ -56,7 +60,9 @@ const data = {
         height: '2 feet',
         bloomTime: 'May, June',
         bloomColor: 'White',
-        countInStock: 0
+        countInStock: 0,
+        isFeatured: true,
+        banner: '/images/dolls-eyes.jpg'
     },
 ]
 }

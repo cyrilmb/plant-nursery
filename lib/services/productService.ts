@@ -7,7 +7,7 @@ import ProductModel, {Product} from '../models/ProductModel';
 export const revalidate = 3600
 
 //Cache prevents multiple database hits, caches db query result
-const getLatest = cache(async () => {
+const getInventory = cache(async () => {
     await dbConnect()
     const products = await ProductModel.find({})
     //sort by id descending, so latest product first
@@ -38,7 +38,7 @@ const getBySlug = cache(async (slug: string) => {
 })
 
 const productService = {
-    getLatest,
+    getInventory,
     getFeatured,
     getBySlug
 }

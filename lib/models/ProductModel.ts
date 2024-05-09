@@ -14,6 +14,7 @@ const productSchema = new mongoose.Schema(
         bloomTime : {type: String, required: true},
         bloomColor : {type: String, required: true},
         countInStock : {type: Number, required: true, default: 0},
+        isFeatured: { type: Boolean, default: false },
         banner: String
 }, 
 {

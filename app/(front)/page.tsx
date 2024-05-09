@@ -13,7 +13,7 @@ export const medadata: Metadata = {
 
 export default async function Home() {
   const featuredProducts = await productService.getFeatured()
-  const latestProducts = await productService.getLatest()
+  const inventoryProducts = await productService.getInventory()
   return (
     <>
       <div className="w-full carousel rounded-box mt-4">
@@ -26,7 +26,10 @@ export default async function Home() {
             <Link href={`/product/${product.slug}`}>
               <img src={product.banner} alt={product.name} className="w-full" />
             </Link>
-            <div className="absolute flex justify-between transform-translate-y-1/2 left-5 right-5 top-1/2">
+            <div
+              className="absolute flex justify-between transform
+              -translate-y-1/2 left-5 right-5 top-1/2"
+            >
               <a
                 href={`#slide-${i === 0 ? featuredProducts.length - 1 : i - 1}`}
                 className="btn btn-circle"
@@ -45,9 +48,9 @@ export default async function Home() {
           </div>
         ))}
       </div>
-      <h2 className="text-2xl py-2">Available Seedling Inventory</h2>
+      <h2 className="text-2xl py-2">Seedling Inventory</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {data.products.map((product) => (
+        {inventoryProducts.map((product) => (
           <ProductItem key={product.slug} product={product} />
         ))}
       </div>

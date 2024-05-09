@@ -2,30 +2,47 @@ import data from '@/lib/data'
 import Link from 'next/link'
 import Image from 'next/image'
 import AddToCart from '@/components/products/AddToCart'
+import productService from '@/lib/services/productService'
+import { convertDocToObj } from '@/lib/utils'
 
-export default function ProductDetails({
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string }
 }) {
-  const product = data.products.find((x) => x.slug === params.slug)
+  const product = await productService.getBySlug(params.slug)
+  if (!product) {
+    return { title: 'Product Not Found' }
+  }
+  return {
+    title: product.name,
+    description: product.description,
+  }
+}
+
+export default async function ProductDetails({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const product = await productService.getBySlug(params.slug)
   if (!product) {
     return <div>Product Not Found</div>
   }
-  const x = 2
-  let y = 4
-  function update(arg: number) {
-    return Math.random() + y * arg
-  }
-  y = 2
+  // const x = 2
+  // let y = 4
+  // function update(arg: number) {
+  //   return Math.random() + y * arg
+  // }
+  // y = 2
 
-  const result = update(x)
-  console.log('result: ', result)
+  // const result = update(x)
+  // console.log('result: ', result)
 
   return (
     <>
       <div className="my-2">
-        <Link href="/">Return to Inventory</Link>
+        <Link href="/">&#8592; Return to Inventory</Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
@@ -78,7 +95,7 @@ export default function ProductDetails({
                 <div>
                   <AddToCart
                     item={{
-                      ...product,
+                      ...convertDocToObj(product),
                       qty: 0,
                     }}
                   />
