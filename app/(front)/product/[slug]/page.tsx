@@ -85,7 +85,9 @@ export default async function ProductDetails({
                 <div>Availability </div>
                 <div>
                   <p className="italic">
-                    {product.countInStock > 0
+                    {/* typescript error for product.countInStock was popping up here (but not below?) and this fixed it */}
+                    {product.countInStock !== undefined &&
+                    product.countInStock > 0
                       ? 'In Stock'
                       : 'currently unavailable'}
                   </p>
