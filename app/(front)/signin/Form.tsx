@@ -80,7 +80,34 @@ const Form = () => {
               <div className="text-error">{errors.email.message}</div>
             )}
           </div>
-          <div></div>
+          <div className="my-2">
+            <label className="label" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              {...register('password', {
+                required: 'Password is required',
+              })}
+              className="input input-bordered w-full max-w-sm"
+            />
+            {errors.password?.message && (
+              <div className="text-error">{errors.password.message}</div>
+            )}
+          </div>
+          <div className="my-4">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn btn-primary w-full"
+            >
+              {isSubmitting && (
+                <span className="loading loading-spinner"></span>
+              )}
+              Sign In
+            </button>
+          </div>
         </form>
       </div>
     </div>
