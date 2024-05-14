@@ -1,8 +1,8 @@
-import CredentialsProvider from "next-auth/providers/credentials";
-import dbConnect from "./dbConnect";
-import UserModel from "./models/UserModel";
+import CredentialsProvider from "next-auth/providers/credentials"
+import dbConnect from "./dbConnect"
+import UserModel from "./models/UserModel"
 import bcrypt from 'bcryptjs'
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth"
 
 export const config = {
     providers: [
@@ -90,4 +90,4 @@ export const {
     auth,
     signIn,
     signOut,
-} = NextAuth(config)
+  } = NextAuth(config)
