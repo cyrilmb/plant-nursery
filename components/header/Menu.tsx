@@ -1,6 +1,7 @@
 'use client'
 
 import useCartService from '@/lib/hooks/useCartStore'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -13,6 +14,12 @@ const Menu = () => {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const signoutHandler = () => {
+    signOut({ callbackUrl: '/signin' })
+  }
+
+  const { data: session } = useSession()
 
   return (
     <div>
