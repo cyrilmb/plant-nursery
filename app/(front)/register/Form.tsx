@@ -67,6 +67,29 @@ const Form = () => {
       toast.error(err.message || 'message')
     }
   }
+  return (
+    <div className="max-w-sm mx-auto card bg-base-300 my-4">
+      <div className="card-body">
+        <h1 className="card-title">Register</h1>
+        <div className="my-2">
+          <label htmlFor="name" className="label">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            {...register('name', {
+              required: 'Name is required',
+            })}
+            className="input input-bordered w-full max-w-sm"
+          />
+          {errors.name?.message && (
+            <div className="text-error">{errors.name.message}</div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Form
