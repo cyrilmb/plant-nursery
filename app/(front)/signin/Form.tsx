@@ -1,6 +1,7 @@
 'use client'
 
 import { signIn, useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -14,7 +15,7 @@ const Form = () => {
   const { data: session } = useSession()
 
   const params = useSearchParams()
-  let callbackURL = params.get('callbackURL') || '/'
+  let callbackUrl = params.get('callbackUrl') || '/'
   const router = useRouter()
 
   const {
@@ -31,9 +32,9 @@ const Form = () => {
   //if user is authenticated, redirect to URL
   useEffect(() => {
     if (session && session.user) {
-      router.push(callbackURL)
+      router.push(callbackUrl)
     }
-  }, [callbackURL, params, router, session])
+  }, [callbackUrl, params, router, session])
 
   const formSubmit: SubmitHandler<Inputs> = async (form) => {
     const { email, password } = form
@@ -109,6 +110,12 @@ const Form = () => {
             </button>
           </div>
         </form>
+        <div>
+          Need an account?{' '}
+          <Link className="link" href={`/register?callbackUrl=${callbackUrl}`}>
+            Register
+          </Link>
+        </div>
       </div>
     </div>
   )
