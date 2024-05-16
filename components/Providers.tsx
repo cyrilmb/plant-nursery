@@ -1,5 +1,6 @@
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/lib/auth'
+import ClientProviders from './ClientProviders'
 
 //wrap whole app in Providers, a serverside component,
 export default async function Providers({
@@ -10,5 +11,9 @@ export default async function Providers({
   const session = await auth()
 
   //children is Layout, now has access to the session authentication throughout client components
-  return <SessionProvider session={session}>{children}</SessionProvider>
+  return (
+    <SessionProvider session={session}>
+      <ClientProviders>{children}</ClientProviders>
+    </SessionProvider>
+  )
 }

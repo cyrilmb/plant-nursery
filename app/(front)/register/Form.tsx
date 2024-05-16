@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 type Inputs = {
   name: string
