@@ -46,7 +46,7 @@ const calcPrice = (items: OrderItem[]) => {
 
 export default function useCartService() {
     //extract terms from cartStore
-    const {items, itemsPrice, taxPrice, totalPrice} = cartStore()
+    const {items, itemsPrice, taxPrice, totalPrice, paymentMethod, shippingAddress} = cartStore()
     return {
         //return extracted terms so components using this hook can access current
         //cart state w/out needing to access store
@@ -54,6 +54,8 @@ export default function useCartService() {
         itemsPrice,
         taxPrice,
         totalPrice,
+        paymentMethod,
+        shippingAddress,
         //update items in cart and prices
         increase: (item: OrderItem) => {
             //find item based on slug, put in exist
