@@ -4,18 +4,14 @@ import useCartService from '@/lib/hooks/useCartStore'
 import { ShippingAddress } from '@/lib/models/OrderModel'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { SubmitHandler, useForm, ValidationRule } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import CheckoutSteps from '@/components/CheckoutSteps'
+import FormInput from './FormInput'
 
 const Form = () => {
   const router = useRouter()
   const { saveShippingAddress, shippingAddress } = useCartService()
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<ShippingAddress>({
+  const methods = useForm<ShippingAddress>({
     defaultValues: {
       fullName: '',
       address: '',
@@ -24,6 +20,11 @@ const Form = () => {
       country: '',
     },
   })
+  const {
+    setValue,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods
 
   useEffect(() => {
     setValue('fullName', shippingAddress.fullName)
@@ -33,40 +34,10 @@ const Form = () => {
     setValue('country', shippingAddress.country)
   }, [setValue, shippingAddress])
 
-  const formSubmit: SubmitHandler<ShippingAddress> = async (form) => {
+  const formSubmit = async (form: ShippingAddress) => {
     saveShippingAddress(form)
     router.push('/payment')
   }
-
-  const FormInput = ({
-    id,
-    name,
-    required,
-    pattern,
-  }: {
-    id: keyof ShippingAddress
-    name: string
-    required?: boolean
-    pattern?: ValidationRule<RegExp>
-  }) => (
-    <div className="mb-2">
-      <label htmlFor={id} className="label">
-        {name}
-      </label>
-      <input
-        type="text"
-        id={id}
-        {...register(id, {
-          required: required && `${name} is required`,
-          pattern,
-        })}
-        className="input input-bordered w-full max-w-sm"
-      />
-      {errors[id]?.message && (
-        <div className="text-error">{errors[id]?.message}</div>
-      )}
-    </div>
-  )
 
   return (
     <div>
@@ -74,25 +45,29 @@ const Form = () => {
       <div className="max-w-sm mx-auto card bg-base-300 my-4">
         <div className="card-body">
           <h1 className="card-title">Shipping Address</h1>
-          <form onSubmit={handleSubmit(formSubmit)}>
-            <FormInput name="Full Name" id="fullName" required />
-            <FormInput name="Address" id="address" required />
-            <FormInput name="City" id="city" required />
-            <FormInput name="Postal Code" id="postalCode" required />
-            <FormInput name="Country" id="country" required />
-            <div className="my-2">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn btn-primary w-full"
-              >
-                {isSubmitting && (
-                  <span className="loading loading-spinner"></span>
-                )}
-                Next
-              </button>
-            </div>
-          </form>
+          {/* FormProvider is context API, allows childs to access form methods and state w/out re-rendering */}
+          {/* Before I made the FormInput a separate component, it was rerendering with every errors update and losing focus on input fields */}
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(formSubmit)}>
+              <FormInput name="Full Name" id="fullName" required />
+              <FormInput name="Address" id="address" required />
+              <FormInput name="City" id="city" required />
+              <FormInput name="Postal Code" id="postalCode" required />
+              <FormInput name="Country" id="country" required />
+              <div className="my-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary w-full"
+                >
+                  {isSubmitting && (
+                    <span className="loading loading-spinner"></span>
+                  )}
+                  Next
+                </button>
+              </div>
+            </form>
+          </FormProvider>
         </div>
       </div>
     </div>
