@@ -31,7 +31,7 @@ const orderSchema = new mongoose.Schema(
       paymentMethod: { type: String, required: true },
       paymentResult: { id: String, status: String, email_address: String },
       itemsPrice: { type: Number, required: true },
-      shippingPrice: { type: Number, required: true },
+    //   shippingPrice: { type: Number, required: false },
       taxPrice: { type: Number, required: true },
       totalPrice: { type: Number, required: true },
       isPaid: { type: Boolean, required: true, default: false },
@@ -61,7 +61,7 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: string
     paymentResult?: { id: string; status: string; email_address: string }
     itemsPrice: number
-    shippingPrice: number
+    // shippingPrice?: number
     taxPrice: number
     totalPrice: number
     isPaid: boolean

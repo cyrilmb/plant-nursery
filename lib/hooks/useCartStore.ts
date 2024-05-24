@@ -34,13 +34,13 @@ export const cartStore = create<Cart>()(
 )
 
 const calcPrice = (items: OrderItem[]) => {
-    const itemsPrice = round2Decimal(
+    const itemsPrice = Number(round2Decimal(
         //reduce method takes an arr and calls callback fxn (multiply two values)
         //and return accumulated results. acc initial value set to 0
             items.reduce((acc, item) => acc = item.price * item.qty, 0)
-        ),
-        taxPrice = round2Decimal(Number(0.0685 * itemsPrice)),
-        totalPrice = round2Decimal(itemsPrice + taxPrice)
+        )),
+        taxPrice = Number(round2Decimal(0.0685 * itemsPrice)),
+        totalPrice = Number(round2Decimal(itemsPrice + taxPrice))
     return { itemsPrice, taxPrice, totalPrice }
 }
 

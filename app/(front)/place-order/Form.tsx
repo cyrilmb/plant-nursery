@@ -116,7 +116,7 @@ const Form = () => {
                       <td>
                         <Link
                           href={`/product/${item.slug}`}
-                          className="felx items-center"
+                          className="flex items-center"
                         >
                           <Image
                             src={item.image}
@@ -127,6 +127,10 @@ const Form = () => {
                           <span className="px-2">{item.name}</span>
                         </Link>
                       </td>
+                      <td>
+                        <span>{item.qty}</span>
+                      </td>
+                      <td>${item.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -164,10 +168,9 @@ const Form = () => {
                     className="btn btn-primary w-full"
                   >
                     {isPlacing && (
-                      <span className="loading loading-spinner">
-                        Place Order
-                      </span>
+                      <span className="loading loading-spinner"></span>
                     )}
+                    Place Order
                   </button>
                 </li>
               </ul>
