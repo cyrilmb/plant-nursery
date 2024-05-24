@@ -109,6 +109,12 @@ export default function useCartService() {
             cartStore.setState({
                 paymentMethod
             })
+        },
+        //remove all items from shopping cart
+        clear: () => {
+            cartStore.setState({
+                items: []
+            })
         }
     }
 }
