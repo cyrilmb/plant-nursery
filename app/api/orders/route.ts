@@ -32,12 +32,13 @@ export const POST = auth(async (req: any) => {
             },
             'price'
         )
+        
         //update prices of selected items to match prices from database
         const dbOrderItems = payload.items.map((x: {_id: string}) => ({
             ...x,
             //add id to order model
             product: x._id,
-            price: dbProductPrices.find((x) => x._id === x._id),
+            price: dbProductPrices.find((x) => x._id === x._id).price,
             //remove id from dbOrderItems
             _id: undefined
         }))
