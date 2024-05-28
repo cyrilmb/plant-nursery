@@ -100,6 +100,66 @@ export default function OrderDetails({
             </div>
           </div>
         </div>
+        <div>
+          <div className="card bg-base-300">
+            <div className="card-body">
+              <h2 className="card-title">Order Summary</h2>
+              <ul>
+                <li>
+                  <div className="mb-2 flex justify-between">
+                    <div>Items</div>
+                    <div>${itemsPrice}</div>
+                  </div>
+                </li>
+                <li>
+                  <div className="mb-2 flex justify-between">
+                    <div>Tax</div>
+                    <div>${taxPrice}</div>
+                  </div>
+                </li>
+                {/* <li>
+                  <div className="mb-2 flex justify-between">
+                    <div>Shipping</div>
+                    <div>${shippingPrice}</div>
+                  </div>
+                </li> */}
+                <li>
+                  <div className="mb-2 flex justify-between">
+                    <div>Total</div>
+                    <div>${totalPrice}</div>
+                  </div>
+                </li>
+
+                {/* {!isPaid && paymentMethod === 'PayPal' && (
+                  <li>
+                    <PayPalScriptProvider
+                      options={{ clientId: paypalClientId }}
+                    >
+                      <PayPalButtons
+                        createOrder={createPayPalOrder}
+                        onApprove={onApprovePayPalOrder}
+                      />
+                    </PayPalScriptProvider>
+                  </li>
+                )}
+                {session?.user.isAdmin && (
+                  <li>
+                    <button
+                      className="btn w-full my-2"
+                      onClick={() => deliverOrder()}
+                      disabled={isDelivering}
+                    >
+                      {isDelivering && (
+                        <span className="loading loading-spinner"></span>
+                      )}
+                      Mark as delivered
+                    </button>
+                  </li>
+                )} */}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
