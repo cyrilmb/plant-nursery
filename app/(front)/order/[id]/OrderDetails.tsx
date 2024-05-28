@@ -1,7 +1,10 @@
 'use client'
 
+import { OrderItem } from '@/lib/models/OrderModel'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function OrderDetails({
   orderId,
@@ -58,6 +61,42 @@ export default function OrderDetails({
               ) : (
                 <div className="text-error">Not Paid</div>
               )}
+            </div>
+          </div>
+          <div className="card bg-base-300 mt-4">
+            <div className="card-body">
+              <h2 className="card-title">Items</h2>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item: OrderItem) => (
+                    <tr key={item.slug}>
+                      <td>
+                        <Link
+                          href={`/product/${item.slug}`}
+                          className="flex items-center"
+                        >
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            width={50}
+                            height={50}
+                          ></Image>
+                          <span className="px-2">{item.name}</span>
+                        </Link>
+                      </td>
+                      <td>{item.qty}</td>
+                      <td>${item.price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
